@@ -22,9 +22,25 @@ int main()
 	auto min =min_element (arr.begin(), arr.end(), [](Comp a, Comp b) {return a.getChastota() < b.getChastota(); });
 	cout << "Min Comp: " << endl;; min->print(); cout << endl;
 	arr.erase(min); cout << "Delete" << endl;;
-	for (Comp a : arr) a.print();
+	for (Comp a : arr) a.print(); cout << "========================" << endl;
 
-    
+	int count = count_if(arr.begin(), arr.end(), [](Comp a) {return a.getDvdRom(); });
+	cout << "DVD ROM : " << count << " Computer." << endl;
+	cout << "========================" << endl;
+
+	for_each(arr.begin(), arr.end(), [](Comp& a) {if (a.getRam() >= 16) a.setPrice(a.getPrice() * 1.25); });
+	for (Comp a : arr) a.print();
+	cout << "========================" << endl;
+
+	int c = 0;
+	cout << "Input SORT Comp (1 min-max ; 2 max-min): "; cin >> c;
+	cout << "SORT" << endl;
+	sort(arr.begin(), arr.end(), [c](Comp a, Comp b) {
+		if (c == 1) { return a.getPrice() < b.getPrice(); }
+		else { return a.getPrice() > b.getPrice(); }});
+	for (Comp a : arr) a.print();
+	cout << "========================" << endl;
+
     return 0;
 }
 
